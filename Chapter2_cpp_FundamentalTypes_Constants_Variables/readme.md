@@ -16,8 +16,8 @@ Fundamental types
 Type bool
 ---
 
-- 1 --> true
-- 0 --> false
+* 1 --> true
+* 0 --> false
 
 Type char and wchar_t
 ---
@@ -44,28 +44,13 @@ Types Integral
 | long           | 4byte       | -2147483648 -- +2147483648 |
 | unsigned long  | 4byte       | 0 -- 4294967295            |
 
-- 16bit computers --> int is equivalent to short
-- 32bit computers --> int will be equivalent to long
-- c++ treat char and wchar_t like normal integers, so char and wchar_t can perform calculate
-- wchart_t is normally defined as unsigned short
-- int type is normally interpreted as signed, also char type
-- "unsigned int" cant be abbreviated as keyword "unsigned"
-- type size: char <= short <= int <= long
-
-- Examples for integral constants
-
-| Decimal    | Octal        | Hexdecimal | Type                       |
-| ---------- | ------------ | ---------- | -------------------------- |
-| 16         | 020          | 0x10       | int                        |
-| 255        | 0377         | 0xff       | int                        |
-| 32767      | 077777       | 0x7FFFF    | int                        |
-| 32768U     | 0100000U     | 0x8000U    | unsigned int               |
-| 100000     | 0303240      | 0x186A0    | int(32bit)/long(16bit-CPU) |
-| 10L        | 012L         | 0xAL       | long                       |
-| 27UL       | 033UL        | 1bUL       | unsigned long              |
-| 2147483648 | 020000000000 | 0x80000000 | unsigned long              |
-
-
+* 16bit computers --> int is equivalent to short
+* 32bit computers --> int will be equivalent to long
+* c++ treat char and wchar_t like normal integers, so char and wchar_t can perform calculate
+* wchart_t is normally defined as unsigned short
+* int type is normally interpreted as signed, also char type
+* "unsigned int" cant be abbreviated as keyword "unsigned"
+* type size: char <= short <= int <= long
 
 Types Floating-point
 ---
@@ -75,3 +60,84 @@ Types Floating-point
 | float       | 4bytes  | -3.4e+38        | 1.2e-38               | 6digits           |
 | double      | 8bytes  | -1.7e+308       | 2.3e-308              | 15digits          |
 | long double | 10bytes | -1.1E+4932      | 3.4e-4932             | 19digits          |
+
+The sizeof Operator
+---
+
+* sizeof: give the amount of memory needed to store an object(bytes)
+* usage: sizeof(name)
+* eg:
+
+```cpp
+  sizeof(int); // will be 2 or 4 depending on the machine
+  sizeof(float); // will alwalys equal 4
+  int a; 
+  sizeof(a) // will be 2 or 4 depending on the machine
+  ```
+
+Types classification
+---
+
+* fundamental types in cpp are:
+  * integer types(arithmetic types)
+  * floating-point types(arithmetic types)
+  * and the void type(expressions that do not represent a value, eg: a function call)
+
+* Examples for integral constants
+
+| Decimal    | Octal        | Hexdecimal | Type                           |
+| ---------- | ------------ | ---------- | ------------------------------ |
+| 16         | 020          | 0x10       | int                            |
+| 255        | 0377         | 0xff       | int                            |
+| 32767      | 077777       | 0x7FFFF    | int                            |
+| 100000     | 0303240      | 0x186A0    | int(32bit-CPU)/long(16bit-CPU) |
+| 10L        | 012L         | 0xAL       | long                           |
+| 32768U     | 0100000U     | 0x8000U    | unsigned int                   |
+| 27UL       | 033UL        | 1bUL       | unsigned long                  |
+| 2147483648 | 020000000000 | 0x80000000 | unsigned long                  |
+
+Constants
+---
+
+* Boolean Constants
+  boolean expression can have two values that are identified by the keywords true and
+  false. Both constants are of the bool type. They can be used, for example, to set flags
+  representing just two states
+
+* Integral Constants
+  * decimal constant(0 is not included)
+  * octal constant(with a leading 0, eg: 075, 032123)
+  * hexadecimal constant(with a 0x or 0X, eg:0xabc123, 0XEEAB123)
+  * integral constants are usually type int, we can specify the constant's type by adding
+    letter L or l(long), U or u(unsigned), eg:
+
+```cpp
+    12L, 12l // type long
+    12U, 12u // type unsigned int
+    12UL, 12ul // type unsigned long
+```
+
+* Floating-Point Constants
+
+| 1         | 2      | 3      | 4       |
+| --------- | ------ | ------ | ------- |
+| 5.19      | 12.    | 0.75   | 0.00004 |
+| 0.519E1   | 12.0   | .75    | 0.4e-4  |
+| 0.0519e2  | .12E+2 | 7.5e-1 | .4E-4   |
+| 519. OE-2 | 12e0   | 75E-2  | 4E-5    |
+
+* Character Constants
+
+| Constant | Character                  | Constant Value |
+| -------- | -------------------------- | -------------- |
+| 'A'      | Capital A                  | 65             |
+| 'a'      | Lowercase a                | 97             |
+| ' '      | Blank                      | 32             |
+| '.'      | Dot                        | 46             |
+| '0'      | Digit 0                    | 48             |
+| '\0'     | Terminating null character | 0              |
+
+* String Constants
+
+  * String literal: "Hello!"
+  * stored bytes sequence: 'H' 'e' 'l' 'l' 'o' '!' '\0'
