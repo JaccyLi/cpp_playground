@@ -118,6 +118,7 @@ Constants
 ```
 
 * Floating-Point Constants
+  * 必须使用小数点或者E(e)来将浮点数和整型数区分开
 
 | 1         | 2      | 3      | 4       |
 | --------- | ------ | ------ | ------- |
@@ -127,6 +128,7 @@ Constants
 | 519. OE-2 | 12e0   | 75E-2  | 4E-5    |
 
 * Character Constants
+  * 字符常量由单引号和一个字符组成
 
 | Constant | Character                  | Constant Value |
 | -------- | -------------------------- | -------------- |
@@ -138,6 +140,11 @@ Constants
 | '\0'     | Terminating null character | 0              |
 
 * String Constants
-
+  * 字符串常量由多个字符组成，被双引号包围
+  * 字符串保存时不包括双引号，但是由一个null字符('\0')标志着字符串的结束，'\0'所在的字节所有bit都置为0(也即数值为0)
+  * 字符串存储时内存中由于多了null字符，所以会多占用1字节内存空间
   * String literal: "Hello!"
   * stored bytes sequence: 'H' 'e' 'l' 'l' 'o' '!' '\0'
+
+Escape Sequences
+---
