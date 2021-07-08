@@ -16,6 +16,9 @@ int main() {
     p3(mm);
     string hexmm = "\x27"; // 39 --> '
     p3(hexmm);
+    string twolineStr = "I'm a one \
+line string, heiheihei...";
+    p3(twolineStr);
 
 }
 

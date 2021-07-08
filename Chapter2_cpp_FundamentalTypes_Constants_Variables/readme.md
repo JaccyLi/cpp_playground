@@ -86,6 +86,8 @@ Types classification
 Constants
 ---
 
+- 字符串和其他的基本数据类型都可以使用cout输出, int类型默认以十进制输出
+
 * Boolean Constants
   boolean expression can have two values that are identified by the keywords true and
   false. Both constants are of the bool type. They can be used, for example, to set flags
@@ -164,3 +166,41 @@ Escape Sequences
 | \0          | string terminating character   | 0               |
 | \ooo        | numerical value of a character | ooo(octal!)     |
 | \xhh        | numerical value of a character | hh(hexadecimal) |
+
+
+Keywords in c++
+---
+
+|           |          |                  |             |              |
+| --------- | -------- | ---------------- | ----------- | ------------ |
+| asm       | do       | inline           | short       | typeid       |
+| do        | auto     | double           | bool        | dynamic_cast |
+| break     | case     | else             | catch       | enum         |
+| char      | explicit | class            | extern      | while        |
+| const     | false    | const_cast       | float       | continue     |
+| for       | default  | friend           | delete      | goto         |
+| if        | inline   | int              | long        | mutable      |
+| namespace | new      | operator         | private     | protected    |
+| public    | register | reinterpret_cast | return      | short        |
+| signed    | sizeof   | static           | static_cast | struct       |
+| switch    | template | this             | throw       | true         |
+| try       | typedef  | typeid           | typename    | union        |
+| unsigned  | using    | virtual          | void        | volatile     |
+| wchar_t   |          |
+
+- 标识符示例
+  Valid：
+  a, CHINA, china, VOID, _var, GetNumber, C919, top_of_mountain, a_short_variable_with_number222333222
+  Invalid:
+  goto, 8086_cpu, dashed-var, CHINA￥
+- 标识符规则
+  - 标识符可以包含字母, 数字或者下划线(_), 大小写敏感
+  - 第一个字符必须是字母或者下划线
+  - 标识符没有长度限制
+  - c++关键字保留, 不允许作为标识符
+
+- 标识符应当和其作用相关, 并清晰易懂
+  - c, ch --> 字符
+  - i, j, k, l, m, n --> 整形数
+  - x, y, z --> 浮点型数
+
