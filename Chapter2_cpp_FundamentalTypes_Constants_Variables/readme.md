@@ -83,19 +83,6 @@ Types classification
   * floating-point types(arithmetic types)
   * and the void type(expressions that do not represent a value, eg: a function call)
 
-* Examples for integral constants
-
-| Decimal    | Octal        | Hexdecimal | Type                           |
-| ---------- | ------------ | ---------- | ------------------------------ |
-| 16         | 020          | 0x10       | int                            |
-| 255        | 0377         | 0xff       | int                            |
-| 32767      | 077777       | 0x7FFFF    | int                            |
-| 100000     | 0303240      | 0x186A0    | int(32bit-CPU)/long(16bit-CPU) |
-| 10L        | 012L         | 0xAL       | long                           |
-| 32768U     | 0100000U     | 0x8000U    | unsigned int                   |
-| 27UL       | 033UL        | 1bUL       | unsigned long                  |
-| 2147483648 | 020000000000 | 0x80000000 | unsigned long                  |
-
 Constants
 ---
 
@@ -117,27 +104,39 @@ Constants
     12UL, 12ul // type unsigned long
 ```
 
+* Examples for integral constants
+  | Decimal    | Octal        | Hexdecimal | Type                           |
+  | ---------- | ------------ | ---------- | ------------------------------ |
+  | 16         | 020          | 0x10       | int                            |
+  | 255        | 0377         | 0xff       | int                            |
+  | 32767      | 077777       | 0x7FFFF    | int                            |
+  | 100000     | 0303240      | 0x186A0    | int(32bit-CPU)/long(16bit-CPU) |
+  | 10L        | 012L         | 0xAL       | long                           |
+  | 32768U     | 0100000U     | 0x8000U    | unsigned int                   |
+  | 27UL       | 033UL        | 1bUL       | unsigned long                  |
+  | 2147483648 | 020000000000 | 0x80000000 | unsigned long                  |
+
 * Floating-Point Constants
   * 必须使用小数点或者E(e)来将浮点数和整型数区分开
 
-| 1         | 2      | 3      | 4       |
-| --------- | ------ | ------ | ------- |
-| 5.19      | 12.    | 0.75   | 0.00004 |
-| 0.519E1   | 12.0   | .75    | 0.4e-4  |
-| 0.0519e2  | .12E+2 | 7.5e-1 | .4E-4   |
-| 519. OE-2 | 12e0   | 75E-2  | 4E-5    |
+  | 1         | 2      | 3      | 4       |
+  | --------- | ------ | ------ | ------- |
+  | 5.19      | 12.    | 0.75   | 0.00004 |
+  | 0.519E1   | 12.0   | .75    | 0.4e-4  |
+  | 0.0519e2  | .12E+2 | 7.5e-1 | .4E-4   |
+  | 519. OE-2 | 12e0   | 75E-2  | 4E-5    |
 
 * Character Constants
   * 字符常量由单引号和一个字符组成
 
-| Constant | Character                  | Constant Value |
-| -------- | -------------------------- | -------------- |
-| 'A'      | Capital A                  | 65             |
-| 'a'      | Lowercase a                | 97             |
-| ' '      | Blank                      | 32             |
-| '.'      | Dot                        | 46             |
-| '0'      | Digit 0                    | 48             |
-| '\0'     | Terminating null character | 0              |
+  | Constant | Character                  | Constant Value |
+  | -------- | -------------------------- | -------------- |
+  | 'A'      | Capital A                  | 65             |
+  | 'a'      | Lowercase a                | 97             |
+  | ' '      | Blank                      | 32             |
+  | '.'      | Dot                        | 46             |
+  | '0'      | Digit 0                    | 48             |
+  | '\0'     | Terminating null character | 0              |
 
 * String Constants
   * 字符串常量由多个字符组成，被双引号包围
@@ -148,3 +147,20 @@ Constants
 
 Escape Sequences
 ---
+
+| Single Char | Meaning                        | ASCII code      |
+| ----------- | ------------------------------ | --------------- |
+| \a          | alert(BEL)                     | 7               |
+| \b          | backspzce(BS)                  | 8               |
+| \t          | horizontal tab(HT)             | 9               |
+| \n          | line feed(LF)                  | 10              |
+| \v          | vertical tab(VT)               | 11              |
+| \f          | form feed(FF)                  | 12              |
+| \r          | carriage return(CR)            | 13              |
+| \\"         | "(double quote)                | 34              |
+| \\'         | '(single quote)                | 39              |
+| \\?         | ?(question mark)               | 63              |
+| \\\         | \ (backslash)                  | 92              |
+| \0          | string terminating character   | 0               |
+| \ooo        | numerical value of a character | ooo(octal!)     |
+| \xhh        | numerical value of a character | hh(hexadecimal) |
