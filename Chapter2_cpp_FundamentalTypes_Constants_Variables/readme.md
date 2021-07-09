@@ -86,7 +86,7 @@ Types classification
 Constants
 ---
 
-- 字符串和其他的基本数据类型都可以使用cout输出, int类型默认以十进制输出
+* 字符串和其他的基本数据类型都可以使用cout输出, int类型默认以十进制输出
 
 * Boolean Constants
   boolean expression can have two values that are identified by the keywords true and
@@ -167,7 +167,6 @@ Escape Sequences
 | \ooo        | numerical value of a character | ooo(octal!)     |
 | \xhh        | numerical value of a character | hh(hexadecimal) |
 
-
 Keywords in c++
 ---
 
@@ -188,19 +187,90 @@ Keywords in c++
 | unsigned  | using    | virtual          | void        | volatile     |
 | wchar_t   |          |
 
-- 标识符示例
+标识符
+---
+
+* 标识符示例
   Valid：
   a, CHINA, china, VOID, _var, GetNumber, C919, top_of_mountain, a_short_variable_with_number222333222
   Invalid:
   goto, 8086_cpu, dashed-var, CHINA￥
-- 标识符规则
-  - 标识符可以包含字母, 数字或者下划线(_), 大小写敏感
-  - 第一个字符必须是字母或者下划线
-  - 标识符没有长度限制
-  - c++关键字保留, 不允许作为标识符
 
-- 标识符应当和其作用相关, 并清晰易懂
-  - c, ch --> 字符
-  - i, j, k, l, m, n --> 整形数
-  - x, y, z --> 浮点型数
+* 标识符规则
+  * 标识符可以包含字母, 数字或者下划线(_), 大小写敏感
+  * 第一个字符必须是字母或者下划线
+  * 标识符没有长度限制
+  * c++关键字保留, 不允许作为标识符
 
+* 标识符应当和其作用相关, 并清晰易懂
+  * c, ch --> 字符
+  * i, j, k, l, m, n --> 整形数
+  * x, y, z --> 浮点型数
+
+Define a Variables in C++
+---
+
+变量在使用前必须被定义, 当定义一个变量时需要指定type, 一定数量的内存  
+会根据type被预留给该变量, 内存的地址通过引用该变量名得到.  
+
+* Syntax:
+
+  ```cpp
+  type name1 [, name2, ...];
+
+  eg:
+  char c;
+  int i, j, k, counter;
+  float x, y, area;
+  string helloStr;
+  ```
+
+Initialize a Variable in C++
+---
+
+变量可以在定义时初始化, 即在定义时给其赋值, 通过一个'='或者()给一个变量赋值  
+
+* 一个'=' 后紧接着该变量的值
+* 在变量名后紧跟(), 将值写在()中
+
+  ```cpp
+  char c = 'A';
+  char a('C');
+  float y = 3.14159;
+  float y(3.14159);
+  ```
+
+* Any global variables not explicitly initialized default to zero.  
+  In contrast, the initial value for any local variables that you  fail to initialize will have an undefined initial value.
+
+The Keywords const And volatile
+---
+
+* Constant Objects
+  const 关键字用于创建"只读"的对象. 只读的对象没法被再次更改并且在定义时必须被初始化  
+  如:
+
+  ```cpp
+  const double pi = 3.1415926;
+  ```
+
+* Volatile Objects
+  volatile 关键字很少被使用到, 其创建一个变量不仅仅可以被本程序更改, 还可以被  
+  其它程序或者外部时间更改(如硬件时钟的中断事件), 如:
+
+  ```cpp
+  volatile unsigned long clock_ticks;
+  ```
+
+  即使程序自身并没有更改volatile关键字定义的变量, 编译器还是会认为它在上次被访问后已经改变,  
+  因此, 编译器会创建机器码去读取该变量无论该变量何时被访问, 而不是使用一个在某段时间读取的值,  
+
+* 也可以将const和volatile用在一起
+
+  如:
+
+  ```C
+  volatile const unsigned time_to_live;
+  ```
+
+  这种情况则说明time_to_live这个变量不能被本程序更改, 但是可以被外部事件更改
