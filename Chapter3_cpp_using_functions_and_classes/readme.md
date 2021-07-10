@@ -99,3 +99,27 @@ Function Calls Details
     return 0; }
   ```
 
+TYPE void FOR FUNCTIONS
+---
+
+函数不必有返回值, void 类型的函数就是用于不必有返回值的函数, 在其它的某些编程语言中也叫过程
+
+eg:
+
+```cpp
+void srand(usigned int seed);
+void printDummyChar(string cs);
+```
+
+函数也可以没有参数, 定义没有参数的函数时函数名后的括号保持空状态或者填充一个void关键字( void )
+
+eg:
+
+```cpp
+int rand( void );
+double offerDouble( void );
+```
+
+Head files
+---
+
