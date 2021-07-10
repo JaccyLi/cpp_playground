@@ -3,7 +3,7 @@
 src=$1
 out=$(echo $(basename $src) | awk -F'.' '{print $1}')
 
-echo out=$out
+echo out=$out.out
 
 if [[ ! -f $(dirname $src)/${out}.out ]]
 then
