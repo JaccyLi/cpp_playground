@@ -123,3 +123,27 @@ double offerDouble( void );
 Head files
 ---
 
+```cpp
+Header file                 Header file
+   iostream                   myheader.h
+// Declaration of cin, cout   // Declaration of self-defined functions and classes
+// ...                       // long myFunc(int);
+    |                               |
+    |                               |
+    |    Source file : app.cpp      | 
+    | copy           |              |
+    |                |          copy|
+    |---->#include <iostream>       | 
+          #include "myheader.h" <---|
+
+          int maint() {
+            int nu;
+            ...
+            cin >> nu;
+            cout <<  myfunc(nu);
+            ...
+            return 0;
+          }
+
+
+```
