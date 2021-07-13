@@ -158,4 +158,52 @@ Header file                 Header file
 
 编译器搜索头文件的规则
 
-* 
+* 与编译器一起的头文件一般都放置于`include`文件加下, 在源码中使用 `#include <...>` 引入头文件, 加速文件搜索的速度；  
+  另外, 用户自己编写的头文件一般放置于本项目的某目录, 在源码中使用 `#include " ... "` 来引入头文件
+
+  ```cpp
+  #include "customizedHead.h"
+  #include "project.h"
+  ```
+
+标准类(内置类)的定义
+
+* 除了内置的函数定义, 头文件中也包含了标准类定义. 当一个头文件被源文件引入时,  
+  其中定义的任何类及其声明的其它对象都可以被但前源文件访问
+
+  ```cpp
+  #include <iostream>
+  using namespace std;
+  ```
+
+  有上面两句指令后, istream和ostream这两个类就可以配合cin和cout流使用了, cin是istream类的一个对象  
+  cout是ostream类的一个对象
+
+Standard Header Files
+---
+
+Header Files of the C++ standard library
+
+|            |          |         |           |
+| ---------- | -------- | ------- | --------- |
+| algorithm  | ios      | map     | stack     |
+| bitset     | iosfwd   | memory  | stdexcept |
+| complex    | iostream | new     | streambuf |
+| dequeue    | istream  | numeric | string    |
+| exception  | iterator | ostream | typeinfo  |
+| fstream    | limits   | queue   | utility   |
+| functional | list     | set     | valarray  |
+| iomanip    | locale   | sstream | vector    |
+
+Header Files of the C standard library
+
+|          |          |          |          |
+| -------- | -------- | -------- | -------- |
+| assert.h | limits.h | stdarg.h | time.h   |
+| ctype.h  | locale.h | stddef.h | wchar.h  |
+| errno.h  | math.h   | stdio.h  | wctype.h |
+| float.h  | setjmp.h | stdlib.h |
+| iso646.h | signal.h | string.h |
+
+
+Page 70
