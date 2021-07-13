@@ -205,5 +205,68 @@ Header Files of the C standard library
 | float.h  | setjmp.h | stdlib.h |
 | iso646.h | signal.h | string.h |
 
+在C++中, 头文件是由'.h'扩展名称所标识, 头文件中包含了所有的声明和定义并存在其自己的命名空间中.  
+虽然引入了某个头文件, 但是由于对于源文件来说, 头文件中的命名空间中的标识符是无法直接引用的:  
 
-Page 70
+```cpp
+#include <iostream>
+```
+
+上面虽然引用了iostream头文件, 但是编译器仍然无法知道cin和cout流. 为了能全局使用std命名空间中  
+的标识符, 必须使用一个`using`指令  
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+```
+
+如此, 才能直接使用cin和cout而不必使用(std::cin, std::cout), 上面还引入了string头文件, 这  
+使得`string`这个类可以被该源文件使用.  
+
+**注意**: C的标准头文件被C++完全采纳, 所以C的标准库的所有功能在C++中都可以使用
+
+```cpp
+#include <math.h>
+```
+
+引入math.h后, 数学相关的功能即可使用, 但是在C头文件中声明的标识符是全局可见的, 这在一些大型项目  
+中可能会导致名称冲突. 因此, 在C++中对于每个C的头文件都会有一个兄弟, 比如math.h, C++中会有一个  
+叫cmath的头文件, 其在std名称空间中声明和name.h一样的标识符, 所以上面的引入等同于:
+
+```cpp
+#include <cmath>
+using namespace std;
+```
+
+string.h或者cstring必须被引入以使用里面的标准函数来操作字符串. 这两个头文件使得引入其的程序可以  
+访问C的字符串库, 但是它们和C++的string头文件是不同的, string头文件中定义了string类.  
+
+Using Standard Classes
+---
+
+```cpp
+#include <iostream> // Declaration of cin, cout
+#include <string>   // Declaration of class string
+using namespace std;
+
+int main() {
+    string tip("Tell me your name: "),
+    name,
+    line(50, '*'),  // string with 50 *
+    greet = "Hey, ";
+
+    cout << tip;
+    getline(cin, name);  // get a sring in one line
+
+    greet = greet + name;
+
+    cout << line << endl
+         << greet << endl;
+    cout << "Good name, your name is " << name.length() << " characters long!" << endl;
+
+    cout << line << endl;
+
+    return 0;
+}
+```
