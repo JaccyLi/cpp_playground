@@ -270,3 +270,43 @@ int main() {
     return 0;
 }
 ```
+
+C++标准库中定义了很多类, 包括用于输入和输出的类, 也包括用于表示string和处理错误的类.  
+每个类都是具有特定属性和功能的类型. 某个类的属性由其数据成员定义(data members), 其  
+功能由其具有的方法定义(methods). 方法是属于某个类并和数据成员配合完成某些操作的函数.  
+方法也常常被称为成员函数(member functions)
+
+Creating Objects(创建对象)
+---
+
+一个对象是某个类类型的变量, 也叫做改类的一个实例. 当某个对象被创建时, 数据成员会分配  
+到一定的内存并使用相应的值来初始化.
+
+```cpp
+#include <string>
+string s("Wind Flow In The Rye");
+string str = "Now you see";
+```
+
+在上面的例子中, s对象是标准类string的一个实例, 定义s的同时使用了string类型的常量来  
+初始化了s. string类的对象自己管理string字符串自己需要的内存.
+
+Calling Methods
+---
+
+某个类中所有的公开方法(使用public关键字定义)都可以被其实例对象调用. 与调用一个全局函数不同  
+方法总是被其所属的类的某个实例对象调用. 通过一个点紧跟方法名称再加上一对括号来调用方法.
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+string s("Wind Flow In The Rye");
+int len = s.length(); // call a method on string's instance
+cout << len << endl; // 20 characters
+```
+
+上面的例子中. length() 方法会返回调用其的字符串实例的长度(字符串中字符个数)
+
+Classes and Blobal Functions(类和全局函数)
+---

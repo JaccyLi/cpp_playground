@@ -19,5 +19,8 @@ int main() {
 
     cout << line << endl;
 
+    string song = "Wind Flow In The Rye";
+    cout << song.length() << endl;
+
     return 0;
 }
