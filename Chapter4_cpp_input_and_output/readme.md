@@ -87,4 +87,175 @@ tips:
 * `>>` 和 `<<` 操作符用来格式化输入和输出, 二者都是为基本数据类型而定义的(字符, 布尔, 数值和字符串)
 * 操纵符(manipulator), 可以插入到输入或者输出流中. 其可以用于为子输入输出流生成格式. 比如  
   经常使用的endl 操纵符, 其可以在行结尾产生一个换行.
-* 另外, 
+* 另外, 格式化标志位定义于父类ios中, 用于决定字符如何输入或者输出, 标志位(flags)由一个特殊整型变量中  
+  的每一位表示. 例如: 其中某个位是否为1决定一个正整数输出是是否带'+'号. 可以单独的修改每一个标准位.  
+  setf()和unsetf()就是用于此目的. 然而更方便的做法是使用操纵符号(manipulators), 所有重要的标志位  
+  都有对应的操纵符号, 操纵符号可以插入到输入或输出流中从而被调用.
+
+整型数的格式化输出
+---
+
+格式化输出整型数的操纵符号(manipulators)
+
+| Manipulator | Effects                                      |
+| :---------- | :------------------------------------------- |
+| oct         | 以八进制输出(Octal base)                     |
+| hex         | 以十六进制输出(Hexadecimal base)             |
+| dec         | 以十进制输出(Decimal base), 默认以十进制输出 |
+|             |
+| showpos     | 在非负的整数前加个'+'号再输出(0 --> +0)      |
+| noshowpos   | 非负数前不加'+'号, 默认                      |
+| uppercase   | 在十六进制输出时使用大写字母                 |
+| nouppercase | 在十六进制输出时使用小写, 默认               |
+
+eg:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 0;
+    int b = -2;
+    cout << showpos << a << endl;
+    cout << noshowpos;
+
+    int aNumber;
+    cout << "Please input an integer: ";
+    cin >> aNumber;
+
+    cout << "Octal\tDecimal\tHexadecimal\tHexadecimal upper\n"
+    << oct << aNumber << "\t"
+    << dec << aNumber << "\t"
+    << hex << aNumber << "\t\t"
+    << uppercase << hex<< aNumber << "\t\n";
+
+    cout << dec << b << "   " << hex << b << endl;
+    return 0;
+}
+```
+
+浮点型数的格式化输出
+---
+
+格式化输出浮点型数的操纵符号(manipulators)
+
+| Manipulator          | Effects                                                                     |
+| :------------------- | :-------------------------------------------------------------------------- |
+| showpoint            | 浮点数输出时使用小数点分隔, 输出的数字位数和使用的精确度相对应              |
+| noshowpoint          | 小数点后面部分的尾部的0将不会被输出, 如果小数点后没有数则小数点不输出(默认) |
+|                      |                                                                             |
+| fixed                | 使用定点计数法输出浮点数(小数点后的数字位数和精度对应)                      |
+| scientific           | 使用科学计数法输出浮点数                                                    |
+|                      |                                                                             |
+| setprecision (int n) | 设置输出的精度为n位                                                         |
+
+修改输出精度的方法
+
+|                        |                            |
+| :--------------------- | :------------------------- |
+| int precision(int n);  | Sets the precision to n.   |
+| int precision() const; | Return the used precision. |
+
+* tip: `int precision() const;`, 这里的const表示precision()只执行读操作
+
+以域的方式输出(Output in Fields)
+---
+
+以域输出的函数
+
+| Method             | Effects                              |
+| :----------------- | :----------------------------------- |
+| int width() const; | Returns the minimum field width used |
+| int width(int n);  | Sets the minimum field width to n    |
+| int fill() const;  | Returns the fill character used      |
+| int fill(int ch);  | Sets the fill character to ch        |
+
+以域输出的操纵符
+
+| Method          | Effects                                                                   |
+| :-------------- | :------------------------------------------------------------------------ |
+| setw(int n)     | Sets the minimum field width to n                                         |
+| setfill(int ch) | Sets  the fill character to ch                                            |
+|                 |                                                                           |
+| left            | Left-aligns output in fields                                              |
+| right           | Right-aligns output in fields                                             |
+| internal        | Left-aligns output of the sign andright-aligns output of the numericvalue |
+
+**注意**: 这些操纵符号`setw(int n)`和方法`int width(int n)`是暂时性的, 只对下一次输出有效;
+
+eg:
+
+```cpp
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main() {
+    cout << "current default field width: " << cout.width() << endl;
+    cout << "aaa" << endl;
+    cout.width(8);
+    int w = cout.width();
+    cout << "AAA" << endl;
+    cout << "current field width w: " << w << endl;
+    int w2 = cout.width();
+    cout << "current field width w2: " << w2 << endl;
+    cout.width(2);
+    int nw = cout.width();
+    cout << "current default field width again?: " << nw << endl;
+    cout << "current default field width: " << "5 space ahead of me?" << endl;
+
+    for (int i=0;i<10;i++)
+    {
+        if (i%2 == 0)
+        {
+            cout << '|' << setw(10);
+        }
+        else if (i%2 == 1)
+        {
+            cout << 'A' << '|';
+            cout << endl;
+        }
+    }
+
+    cout << setfill('*') << setw(30) << '\0' << endl;
+    cout << '|' << setfill(' ') << setw(29) << '|' << endl;
+    cout.fill('=');
+    cout << setw(30) << '\0' << endl;
+
+    cout.width(8); cout.fill('0');
+    cout << internal << -123 << endl;
+    cout << left << cout.width(8) << 'H' << endl;
+
+}
+
+/*
+Output: 
+current default field width: 0
+aaa
+     AAA
+current field width w: 8
+current field width w2: 0
+current default field width again?: 2
+current default field width: 5 space ahead of me?
+|         A|
+|         A|
+|         A|
+|         A|
+|         A|
+*****************************
+|                            |
+=============================
+-0000123
+00000000H
+*/
+```
+
+字符, 字符串和布尔值的输出
+---
+
+eg:
+
+```cpp
+
+```
