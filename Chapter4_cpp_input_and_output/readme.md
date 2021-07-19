@@ -254,10 +254,81 @@ current default field width: 5 space ahead of me?
 字符, 字符串和布尔值的输出
 ---
 
+可以将字符存储在char或者int类型中, 使用cout输出时输出字符或者对应的ascii值  
+string可以在使用<<输出时可以进行位置的格式化, bool值在输出时可以使用`boolalpha`  
+操纵符号来是其输出为字母(true/false)而不是1和0.
+
 eg:
 
 ```cpp
+#include <iostream>
+#include <iomanip>
 
+using namespace std;
+
+int main() {
+    // output char
+    int char1 = '0';
+    char char2 = 'A';
+    cout <<"the ascii value: " << char1 << " is char '0'" << endl;
+    cout << "char2 is: " << char2 << endl;
+
+    // output boolean
+    bool isShe = true;
+    bool imJack = true;
+    bool doorOpen = 0;
+    cout << "Is she? " << isShe  << endl;
+    cout << "I'm Jack? " << boolalpha << imJack  << endl;
+    cout << "Door is Open? " << doorOpen << endl;
+
+    // output string
+    string s("Summer is Over ");
+    cout << left
+         << setfill('?')
+         << setw(30) << s << endl;
+    cout << right 
+         << setfill('?')
+         << setw(30) << s << endl;
+}
 ```
 
-page 89
+格式化输入
+---
+
+使用cin.sync()来清除某次输入后的输入缓冲, 使用cin.clear()函数可以重置  
+任何在输入中发生的错误标识
+
+eg:
+
+```cpp
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <ios>
+#include <limits>
+
+using namespace std;
+
+// FileName:          cpp_input_formatting.cpp
+// Date:              2021-07-19
+// 
+
+int main()
+{
+    float x, y = 3.14;
+    string title; 
+
+    cout << "input a title: ";
+    cin.width(16);
+    cin >> title;
+    cin.sync();
+    cin.clear();
+
+    cout << "input a float: ";
+    cin >> x;
+    cout <<"title: " << title << endl;
+    cout << fixed << setprecision(2) << x << endl;
+
+    return 0;
+}
+```
