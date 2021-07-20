@@ -382,5 +382,144 @@ b is: 0
 */
 ```
 
-输入域
+输入域(输入时cin认为空格或者tab隔开的内容是不同的域)
 ---
+
+在使用cin和`>>`操作符接受输入流时, 该操作符会默认读取下一个域(上个输入后的tab,space,return会被忽略),  
+并且会尝试将输入转化为所提供的变量的类型, 再将接受到的数据写入到变量. 输入域会被第一个空格或者第一个无法  
+处理的字符所终结, 此时读取的就是一个输入域. 当遇到无法处理的字符时, 当前的域读取结束了, 接下来的cin会读取  
+后面的域(仍然留在输入缓冲区中等待读取).
+
+eg: 输入字符
+
+```cpp
+char a,b,c;
+cin >> a;
+cout << a << endl;
+
+cin.sync();
+cin.clear();
+
+cin >> b;
+cout << b << endl;
+
+cin.sync();
+cin.clear();
+
+cin >> c;
+cout << c << endl;
+/* input 1:
+    j
+j
+  a
+a
+c
+c
+*/
+
+/* input 2:
+jack
+j
+a
+c
+*/
+
+/* input 3:
+j
+j
+a
+a
+c
+c
+*/
+
+/* input 4:
+j     a       ck
+j
+a
+c
+*/
+```
+
+eg: 输入数值
+
+```cpp
+int i;
+cin >> i;
+cout << i << endl;
+
+cin.sync();
+
+string remain;
+cin >> remain;
+cout << remain << endl;
+
+/*input 1:
+123jack
+123
+jack
+*/
+
+/*input 2:
+   123	jack
+123
+jack
+*/
+
+/*input 3: 正确输入
+123
+123
+jack
+jack
+*/
+```
+
+eg: 输入字符串
+
+```cpp
+
+```
+
+eg: 如果一个cin接受数据后
+
+```cpp
+#include <iostream>
+#include <string>
+#include <ios>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+  int age;
+  cout << "What is your age? ";
+  cin >> setw(8) >> age;
+  std::cout << "Hello, you are " << age << " years old!\n";
+  
+  cin.sync();
+  cin.clear();
+  
+  string remain;
+  cout << "input remain: ";
+  cin >> remain;
+  cout << "remain is: " << remain << endl;
+}
+/* input 1:
+What is your age? 18
+Hello, you are 18 years old!
+input remain: jack
+remain is: jack
+*/
+
+/* input 2:
+What is your age? 18jack
+Hello, you are 18 years old!
+input remain: remain is: jack    // don't let input remain
+*/
+
+/* input 3:
+What is your age?    18   jack      // blanks are ignored
+Hello, you are 18 years old!
+input remain: remain is: jack
+*/
+```
