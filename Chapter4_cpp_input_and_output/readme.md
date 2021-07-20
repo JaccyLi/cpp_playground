@@ -296,7 +296,8 @@ int main() {
 ---
 
 使用cin.sync()来清除某次输入后的输入缓冲, 使用cin.clear()函数可以重置  
-任何在输入中发生的错误标识
+任何在输入中置位的错误标志位, 即使下面例子中输入的字符数量超过16, 程序也会  
+等待接下来的输入.
 
 eg:
 
@@ -333,4 +334,53 @@ int main()
 }
 ```
 
-page 92
+如上面的例子中`cin.width(16)`在输入字符串时可以指定宽度, 即可以输入的最大字符数  
+
+使用`>>`操作符时也可以指定输入的数以十进制、八进制或者十六进制来解析输入的数字  
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+  int a;
+  cout << "input a(hex): ";
+  cin >> hex >> a;
+  cout << "a is: " <<  a <<endl;
+  
+  cin.sync();
+  cin.clear();
+  
+  int b;
+  cout << "input b(oct): ";
+  cin >> oct >> b;
+  cout << "b is: " <<  b << endl;
+}
+
+/* Input one:
+input a(hex): 0xF1
+a is: 241
+input b(oct): 021
+b is: 17
+*/
+
+/* Input two:
+input a(hex): f1
+a is: 241
+input b(oct): 23
+b is: 19
+*/
+
+/* Input three:
+input a(hex): 0xg
+a is: 0
+input b(oct): 9
+b is: 0
+*/
+```
+
+输入域
+---
