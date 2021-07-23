@@ -255,8 +255,7 @@ current default field width: 5 space ahead of me?
 ---
 
 可以将字符存储在char或者int类型中, 使用cout输出时输出字符或者对应的ascii值  
-string可以在使用<<输出时可以进行位置的格式化, bool值在输出时可以使用`boolalpha`  
-操纵符号来是其输出为字母(true/false)而不是1和0.
+操纵符号来使其输出为字母(true/false)而不是1和0.
 
 eg:
 
@@ -388,7 +387,7 @@ b is: 0
 在使用cin和`>>`操作符接受输入流时, 该操作符会默认读取下一个域(上个输入后的tab,space,return会被忽略),  
 并且会尝试将输入转化为所提供的变量的类型, 再将接受到的数据写入到变量. 输入域会被第一个空格或者第一个无法  
 处理的字符所终结, 此时读取的就是一个输入域. 当遇到无法处理的字符时, 当前的域读取结束了, 接下来的cin会读取  
-后面的域(仍然留在输入缓冲区中等待读取).
+后面的域(后面的域仍然留在输入缓冲区中等待读取).
 
 eg: 输入字符
 
@@ -477,10 +476,36 @@ jack
 eg: 输入字符串
 
 ```cpp
+#include <iostream>
+#include <iomanip>
 
+using namespace std;
+
+// FileName:          Chapter4_cpp_input_and_output/cpp_input_strings.cpp
+// Date:              2021-07-22
+// 
+
+int main()
+{
+    string s;
+    cout << "input a str: ";
+    cin >> s;
+    cout << "str is: " << s << endl;
+}
+
+/*input 1:
+input a str: jack is jack
+str is: jack
+*/
+
+/*input 2:
+input a str: jackisajack
+str is: jackisajack
+*/
 ```
 
-eg: 如果一个cin接受数据后
+eg: 如果一个cin接受数据遇到空格,tab或者return等无法处理的字符时视为本次接受的域结束,  
+    后一个cin会读取接下来留在输入缓冲区的数据
 
 ```cpp
 #include <iostream>
@@ -523,3 +548,41 @@ Hello, you are 18 years old!
 input remain: remain is: jack
 */
 ```
+
+输入整型数
+---
+
+可以使用hex, oct and dec来指定输入的字符串按照hexadecimal, octal or decimal来处理
+
+eg: 下面输入21(被认为是8进制), 会被解析为十进制的17
+
+```cpp
+int n;
+cin >> oct >> n;
+cout << n;
+```
+
+eg: 下面输入21(被认为是16进制), 会被解析为十进制的33
+
+```cpp
+int n;
+cin >> hex >> n;
+cout << n;
+```
+
+输入浮点数
+---
+
+当存储输入的变量是浮点型时(floaat, double, long double), `>>` 操作符会将任何输入解析为浮点类型  
+浮点数可以使用定点表示法或者指数计数法输入
+
+eg: 此时输入如123, 0.23, -2.33或者2e3都是合法的  
+
+```cpp
+double x;
+cin >> x;
+```
+
+Unformatted input
+---
+
