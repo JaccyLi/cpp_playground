@@ -8,6 +8,8 @@ using namespace std;
 // Date:              2021-07-22
 // 
 
+string header("--- Demo for Unformatted Input ---");
+
 int main()
 {
     string s;
