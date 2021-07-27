@@ -255,7 +255,8 @@ current default field width: 5 space ahead of me?
 ---
 
 可以将字符存储在char或者int类型中, 使用cout输出时输出字符或者对应的ascii值  
-操纵符号来使其输出为字母(true/false)而不是1和0.
+操纵符号来使其输出为字母(true/false)而不是1和0. 需要注意的是对于ascii码和  
+int来说, 定义的类型决定输出时是显示char还是int.
 
 eg:
 
@@ -267,10 +268,13 @@ using namespace std;
 
 int main() {
     // output char
-    int char1 = '0';
-    char char2 = 'A';
+    int char1 = '0';  // 输出时显示int值
+    char char2 = 'A'; // 输出时显示char本身
+    char char3 = 97;  // 输出时显示a
+
     cout <<"the ascii value: " << char1 << " is char '0'" << endl;
     cout << "char2 is: " << char2 << endl;
+    cout << "char3 is: " << char3 << endl;
 
     // output boolean
     bool isShe = true;
@@ -586,3 +590,90 @@ cin >> x;
 Unformatted input
 ---
 
+eg:
+
+```cpp
+#include <iostream>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+
+// FileName:          Chapter4_cpp_input_and_output/cpp_unformatted_input.cpp
+// Date:              2021-07-22
+// 
+
+string header("--- Demo for Unformatted Input ---");
+
+int main()
+{
+    string prefix, remain;
+
+    cout << header
+         << "\n\nPress <return> to continue\n"; 
+
+    cin.get();
+
+    cout << "\nPlease enter a sentence with several words!"
+         << "\nEnd with <!> and <return>."
+         << endl;
+
+    cin >> prefix;                // Read the first word
+    getline( cin, remain, '!');   // and the remaining text
+                                  // up to the character !
+
+    cout << "\nThe first word:   " << prefix 
+         << "\nRemaining text: " << remain << endl;
+
+    return 0;
+}
+```
+
+在上面的例子中, 使用了两个函数1: `cin.get()`和2: `getline()`, 1在不传入参数时表示  
+读取标准输入的一个字符但是不保存, 当其指定一个char类型的变量作为其参数时, 表示从标准输  
+入流中读取下一个字符, 并存在char类型的变量中. 另外, 还有个函数`cout.put()`表示输出单  
+个字符, eg:
+
+```cpp
+char ch1;
+cin.get(ch1);
+
+char ch2 = 'A';
+cout.put(ch2);  // cout << ch2;
+```
+
+而`getline()`则是用来读取一行数据, eg:
+
+```cpp
+string line;
+getline(std::cin, line);
+```
+
+其会从标准输入读取一整行数据(知道回车键按下), 存储在string类型的line变量中, 也可以指定非  
+回车键为接收结束的标志, 给getline()指定第三个char类型的参数即可. eg:
+
+```cpp
+string line;
+getline(std::cin, line, '.');
+```
+
+上面的例子中, '.' 不会被存储在line中, '.'后面的内存都会被存在输入缓冲区中, 如果后续有  
+读取操作, cin 将会接收到'.'后面的内容:
+
+```cpp
+    string line, remain;
+    getline(cin, line, '.');
+    cin >> remain;
+
+    cout << "line: " << line << endl;
+    cout << "remain: " << remain << endl;
+
+//Input:
+// jack is a good man. and this is the remain
+
+// Output:
+/*
+line: jack is a good man
+remain: and
+*/
+```
