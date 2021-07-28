@@ -11,9 +11,15 @@ using namespace std;
 
 int main()
 {
-    int a, b, c = 0;
-    bool youFoll = false;
+    int a = 234;
     float x, y = 3.14;
-    string s("Summer is Over?");
-    char aChar = '0';
+
+    float z = y * 1.5926;
+    x = y * z + (z - y);
+
+    int b = a % 12;
+
+    cout << z << endl;
+    cout << x << endl;
+    cout << b << endl;
 }
