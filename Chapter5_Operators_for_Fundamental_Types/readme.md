@@ -5,11 +5,11 @@ Chapter5 Operators for Fundamental Types
 ---
 
 ```cpp
-                   |-----> Operator
-                   |
+                   | -----> Operator |
+                   | u-------------- |
                  a + b
-                 |   |
-                 |   |
+                 |     |
+                 | u-- |
 Left operand <---|   |---> Right operand
 ```
 
@@ -154,3 +154,57 @@ i *= j + 1;   // i = i * (j + 1)
 
 关系运算符
 ---
+
+关系运算符
+
+| Operator | Significance             |
+| -------- | ------------------------ |
+| <        | less than                |
+| <=       | less than or equal to    |
+| >        | greater than             |
+| >=       | greater than or equal to |
+| ==       | equal                    |
+| !=       | unequal                  |
+
+关系运算符和数学运算符优先级
+
+| Precedence | Operator                         |
+| ---------- | -------------------------------- |
+| High       | Arithmetic Operators (+ - * / %) |
+| -          | `<`, `<=`, `>`, `>=`             |
+| -          | `==`, `!=`                       |
+| Low        | Assignment Operators (=)         |
+
+eg:
+
+```cpp
+// true, 65 < 97
+'A' < 'a';
+
+// 3 < (3 - 1) --> false, flag = false;
+int index = 3, max = 3
+bool flag = index < max - 1;  
+
+// (1 + 2) == 3 --> true, res = 1;
+int res;
+int len = 1, limit = 3;
+res = len + 2 == limit;
+
+// res == 1 + 1 == 2, 2 != 3 --> false, rres = 0
+int res, rres;
+int len = 1, limit = 3;
+rres = (res = len + 1) == limit;
+```
+
+对于一个数值来说, 如果其值为0则被解析为'false', 其它非0值均被解析为'true'
+
+逻辑运算符(&& || !)
+---
+
+逻辑运算符和可和关系运算符组合成为条件来执行特定的代码片段, 逻辑运算符的操作数为bool类型.
+但是任何可以转化为bool类型的操作数都可以被使用在逻辑运算中: 
+
+```cpp
+(len < .2) || ()
+() && ()
+```
